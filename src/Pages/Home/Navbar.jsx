@@ -18,6 +18,16 @@ const Navbar = () => {
           All Books
         </Link>
       </li>
+      <li>
+        <Link className="font-bold" to="/addBook">
+          Add Book
+        </Link>
+      </li>
+      <li>
+        <Link className="font-bold" to="/addAuthor">
+          Add Author
+        </Link>
+      </li>
     </>
   );
   return (
