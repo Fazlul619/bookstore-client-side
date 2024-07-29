@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import img from "../../assets/book.jpg";
+import { AuthContext } from "../../providers/AuthProviders";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState(" ");
+  const [registerSuccess, setRegisterSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleRegister = (event) => {
     event.preventDefault();
@@ -12,6 +17,8 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(name, email, password);
+    setRegisterError(" ");
+    setRegisterSuccess(" ");
 
     if (password.length < 6) {
       setRegisterError("Password Should Be At Least 6 Characters Or Longer");
@@ -22,6 +29,16 @@ const Register = () => {
       );
       return;
     }
+    createUser(email, password)
+      .then(() => {
+        // console.log(result);
+        toast.success("User Created Successfully");
+        registerSuccess;
+      })
+      .catch((error) => {
+        console.log(error);
+        setRegisterError(error.message);
+      });
   };
   return (
     <div>
@@ -94,6 +111,7 @@ const Register = () => {
             </p>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
