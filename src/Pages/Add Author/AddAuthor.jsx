@@ -1,4 +1,13 @@
+import { useContext } from "react";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import { AuthContext } from "../../providers/AuthProviders";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+
 const AddAuthor = () => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useContext(AuthContext);
+  const email = user.email;
   const handleAuthor = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -8,17 +17,38 @@ const AddAuthor = () => {
     const bio = form.bio.value;
     const birthDate = form.birthDate.value;
 
-    const authorInfo = {
+    const authorData = {
       authorName,
       authorImage,
       bio,
       birthDate,
+      email,
     };
     form.authorName.value = "";
     form.authorImage.value = "";
     form.bio.value = "";
     form.birthDate.value = "";
-    console.log(authorInfo);
+    console.log(authorData);
+    axiosPublic
+      .post("/author-collection-post-api", authorData)
+      .then((res) => {
+        if (res.data.insertedId) {
+          console.log("Author add");
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Author Added Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+        toast.error(error.message);
+      });
   };
 
   return (
