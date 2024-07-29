@@ -1,4 +1,13 @@
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProviders";
 const AddBook = () => {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useContext(AuthContext);
+  const email = user.email;
+
   const handleAddBook = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -8,17 +17,39 @@ const AddBook = () => {
     const description = form.description.value;
     const publishedDate = form.publishedDate.value;
 
-    const bookInfo = {
+    const bookData = {
       bookName,
       bookImage,
       description,
       publishedDate,
+      email,
     };
     form.bookName.value = "";
     form.bookImage.value = "";
     form.description.value = "";
     form.publishedDate.value = "";
-    console.log(bookInfo);
+    console.log(bookData);
+
+    axiosPublic
+      .post("/book-collection-post-api", bookData)
+      .then((res) => {
+        if (res.data.insertedId) {
+          console.log("Book add");
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Book Added Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+        toast.error(error.message);
+      });
   };
 
   return (
