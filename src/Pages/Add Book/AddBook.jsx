@@ -6,7 +6,7 @@ import { AuthContext } from "../../providers/AuthProviders";
 const AddBook = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
-  const email = user.email;
+  const email = user?.email;
 
   const handleAddBook = (event) => {
     event.preventDefault();
@@ -16,18 +16,21 @@ const AddBook = () => {
     const bookImage = form.bookImage.value;
     const description = form.description.value;
     const publishedDate = form.publishedDate.value;
+    const authorName = form.authorName.value;
 
     const bookData = {
       bookName,
       bookImage,
       description,
       publishedDate,
+      authorName,
       email,
     };
     form.bookName.value = "";
     form.bookImage.value = "";
     form.description.value = "";
     form.publishedDate.value = "";
+    form.authorName.value = "";
     console.log(bookData);
 
     axiosPublic
@@ -118,6 +121,23 @@ const AddBook = () => {
               </label>
             </div>
           </div>
+          <div className="md:flex mb-8 justify-center  items-center">
+            <div className="md: w-1/2">
+              <label className="form-control">
+                <div className="label">
+                  <span className="label-text">Author Name</span>
+                </div>
+                <input
+                  type="text"
+                  name="authorName"
+                  required
+                  placeholder="Author Name"
+                  className="input input-bordered w-full"
+                />
+              </label>
+            </div>
+          </div>
+
           <div className="mt-10">
             <input
               type="submit"

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const AddAuthor = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useContext(AuthContext);
-  const email = user.email;
+  const email = user?.email;
   const handleAuthor = (event) => {
     event.preventDefault();
     const form = event.target;
