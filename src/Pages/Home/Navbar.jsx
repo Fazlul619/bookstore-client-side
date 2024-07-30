@@ -9,16 +9,6 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className="font-bold" to="/allAuthor">
-          All Authors
-        </Link>
-      </li>
-      <li>
-        <Link className="font-bold" to="/allBook">
-          All Books
-        </Link>
-      </li>
-      <li>
         <Link className="font-bold" to="/addBook">
           Add Book
         </Link>
@@ -26,6 +16,11 @@ const Navbar = () => {
       <li>
         <Link className="font-bold" to="/addAuthor">
           Add Author
+        </Link>
+      </li>
+      <li>
+        <Link className="font-bold" to="/manageMyBooksList">
+          Manage My Books List
         </Link>
       </li>
     </>
