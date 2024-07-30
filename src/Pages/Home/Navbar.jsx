@@ -23,6 +23,11 @@ const Navbar = () => {
           Manage My Books List
         </Link>
       </li>
+      <li>
+        <Link className="font-bold" to="/manageMyAuthorsList">
+          Manage My Authors List
+        </Link>
+      </li>
     </>
   );
   return (

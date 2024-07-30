@@ -11,6 +11,8 @@ import BookDetails from "../Pages/Book Details/BookDetails";
 import AuthorDetails from "../Pages/Author Details/AuthorDetails";
 import ManageMyBooksList from "../Pages/Manage My Books List/ManageMyBooksList";
 import UpdateABook from "../Pages/Manage My Books List/UpdateABook";
+import ManageMyAuthorList from "../Pages/Manage My Author List/ManageMyAuthorList";
+import UpdateAnAuthor from "../Pages/Manage My Author List/UpdateAnAuthor";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +70,16 @@ export const router = createBrowserRouter([
         element: <UpdateABook></UpdateABook>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allBooks-get-api/${params.id}`),
+      },
+      {
+        path: "/manageMyAuthorsList",
+        element: <ManageMyAuthorList></ManageMyAuthorList>,
+      },
+      {
+        path: "/updateAnAuthor/:id",
+        element: <UpdateAnAuthor></UpdateAnAuthor>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allAuthors-get-api/${params.id}`),
       },
     ],
   },
