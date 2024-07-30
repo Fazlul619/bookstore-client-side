@@ -7,6 +7,7 @@ import AllAuthor from "../Pages/All Author/AllAuthor";
 import AllBook from "../Pages/All Book/AllBook";
 import AddBook from "../Pages/Add Book/AddBook";
 import AddAuthor from "../Pages/Add Author/AddAuthor";
+import BookDetails from "../Pages/Book Details/BookDetails";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       {
         path: "/allBook",
         element: <AllBook></AllBook>,
+        loader: () => fetch("http://localhost:5000/allBooks-get-api"),
       },
       {
         path: "/addBook",
@@ -40,6 +42,12 @@ export const router = createBrowserRouter([
       {
         path: "/addAuthor",
         element: <AddAuthor></AddAuthor>,
+      },
+      {
+        path: "bookDetails/:id",
+        element: <BookDetails></BookDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allBooks-get-api/${params.id}`),
       },
     ],
   },
