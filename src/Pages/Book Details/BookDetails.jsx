@@ -5,7 +5,7 @@ const BookDetails = () => {
   const { bookName, bookImage, description, publishedDate, authorName } =
     bookData;
   return (
-    <div>
+    <div className="my-10">
       <div className="card  lg:card-side shadow-xl max-w-6xl mx-auto mt-28">
         <div className="md:w-96 h-[460px]">
           <img

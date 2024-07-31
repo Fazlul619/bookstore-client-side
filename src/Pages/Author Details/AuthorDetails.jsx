@@ -4,7 +4,7 @@ const AuthorDetails = () => {
   const authorData = useLoaderData();
   const { authorName, authorImage, bio, birthDate } = authorData;
   return (
-    <div>
+    <div className="my-10">
       <div className="card  lg:card-side shadow-xl max-w-6xl mx-auto mt-28">
         <div className="md:w-96 h-[460px]">
           <img
