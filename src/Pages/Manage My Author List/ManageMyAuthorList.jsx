@@ -9,10 +9,12 @@ const ManageMyAuthorList = () => {
   const [authorData, setAuthorData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allAuthors-get-api?email=${user?.email}`)
+    fetch(`http://localhost:5000/allAuthors-get-api?email=${user?.email}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => setAuthorData(data));
-  }, []);
+  }, [user?.email]);
 
   const handleDelete = (id) => {
     Swal.fire({

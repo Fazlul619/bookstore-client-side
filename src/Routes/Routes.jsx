@@ -13,6 +13,7 @@ import ManageMyBooksList from "../Pages/Manage My Books List/ManageMyBooksList";
 import UpdateABook from "../Pages/Manage My Books List/UpdateABook";
 import ManageMyAuthorList from "../Pages/Manage My Author List/ManageMyAuthorList";
 import UpdateAnAuthor from "../Pages/Manage My Author List/UpdateAnAuthor";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -63,21 +64,38 @@ export const router = createBrowserRouter([
       },
       {
         path: "/manageMyBooksList",
-        element: <ManageMyBooksList></ManageMyBooksList>,
+        element: (
+          <PrivateRoute>
+            <ManageMyBooksList></ManageMyBooksList>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/updateABook/:id",
-        element: <UpdateABook></UpdateABook>,
+        element: (
+          <PrivateRoute>
+            <UpdateABook></UpdateABook>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allBooks-get-api/${params.id}`),
       },
       {
         path: "/manageMyAuthorsList",
-        element: <ManageMyAuthorList></ManageMyAuthorList>,
+
+        element: (
+          <PrivateRoute>
+            <ManageMyAuthorList></ManageMyAuthorList>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/updateAnAuthor/:id",
-        element: <UpdateAnAuthor></UpdateAnAuthor>,
+        element: (
+          <PrivateRoute>
+            <UpdateAnAuthor></UpdateAnAuthor>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/allAuthors-get-api/${params.id}`),
       },
